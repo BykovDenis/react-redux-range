@@ -19,7 +19,7 @@ export const initializeRange = () => (dispatch, getState) => {
   const state = getState().Range.values;
   dispatch({
     type: INITIALIZE_RANGE,
-    payload: transparentToPercent(state.min, state.max, state.interval)
+    payload: transparentToPercent(state.min, state.max, state.interval, state.dots)
   });
 };
 

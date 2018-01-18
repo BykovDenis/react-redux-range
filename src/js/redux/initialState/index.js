@@ -9,8 +9,9 @@
 const initialState = {
   values: {
     min: 0,
-    max: 100,
-    interval: [40, 80]
+    max: 120,
+    interval: [40, 80],
+    dots: [20, 35, 60, 75, 95]
   }
 };
 

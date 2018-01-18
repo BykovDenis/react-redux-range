@@ -1,6 +1,6 @@
-.marker {
+.dot {
   position: absolute;
-  z-index: 4;
+  z-index: 3;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
@@ -8,7 +8,7 @@
   transition: border-radius 1s ease-in-out;
   &:hover {
     border-width: 7px;
-    background-color: rgba(66, 162, 225, .7);
+    background-color: rgba(255, 255, 255, .7);
     cursor: pointer;
 
     & > .balloon {
