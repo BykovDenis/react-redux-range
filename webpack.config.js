@@ -21,6 +21,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');  // для плаги�
 var DashboardPlugin = require('webpack-dashboard/plugin');
 // для плагина по минификации и оптимизации css
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// Анализатор зависимосте в бандле
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var RuntimeAnalyzerPlugin = require('webpack-runtime-analyzer');
 
 const buildPath = path.join(__dirname, './build');
 const jsSourcePath = path.join(__dirname, './src');

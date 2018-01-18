@@ -92,6 +92,8 @@
     "reselect": "^3.0.1",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.1",
-    "style-loader": "^0.16.1"
+    "style-loader": "^0.16.1",
+    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-runtime-analyzer": "^1.5.0"
   }
 }
