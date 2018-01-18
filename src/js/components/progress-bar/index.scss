@@ -1,0 +1,13 @@
+.progress-bar {
+  height: 5px;
+  min-width: 95%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, .3);
+  transition: all 1s ease-in-out;
+  &--filled {
+    height: 5px;
+    box-sizing: border-box;
+    border-color: rgba(66, 162, 225, .7);
+    background-color: rgba(66, 162, 225, .7);
+  }
+}

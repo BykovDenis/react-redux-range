@@ -1,0 +1,28 @@
+@import './variables.scss';
+@import './fonts.scss';
+@import './mixin.scss';
+
+.date-line-panel {
+  box-sizing: border-box;
+  position: relative;
+  background-color: rgba(255, 255, 255, .7);
+  padding: 20px 27px;
+  border-radius: 3px;
+  min-width: 800px;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__items {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__item {
+    font-size: 10px;
+    font-weight: 900;
+  }
+}

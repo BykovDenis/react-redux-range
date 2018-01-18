@@ -1,0 +1,48 @@
+<h1>React redux range</h1>
+
+<p>A tooltip component for react.</p>
+
+<h2>Screenshot</h2>
+<h2>Live demo</h2>
+<h2>API</h2>
+
+<table>
+  <tr>
+    <th>name</th>
+    <th>type</th>
+    <th>default</th>
+    <th>description</th>
+  </tr>
+  <tr>
+    <td>min</td>
+    <td>PropTypes.number</td>
+    <td>0</td>
+    <td>Range min value</td>
+  </tr>
+  <tr>
+    <td>max</td>
+    <td>PropTypes.number</td>
+    <td>0</td>
+    <td>Range max value</td>
+  </tr>
+  <tr>
+    <td>value</td>
+    <td>PropTypes.array</td>
+    <td>[0, 100]</td>
+    <td>Range interval values</td>
+  </tr>
+</table>
+
+{{>main}}
+
+{{#if (option "separators")~}}
+{{#if (option "no-gfm")}}
+
+* * *
+
+{{else}}
+
+---
+
+{{/if~}}
+{{/if~}}

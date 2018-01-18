@@ -1,0 +1,8 @@
+build/
+*.html
+css/
+node_modules/
+font/
+.idea/workspace.xml
+.vscode
+.idea
