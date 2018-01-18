@@ -6,11 +6,19 @@ import initialState from '../initialState';
 import {
   NEXT_SITE_SLIDE,
   TYPE_PORTFOLIO,
-  NEXT_SPA_SLIDE
+  NEXT_SPA_SLIDE,
+  INITIALIZE_RANGE
 } from '../constants';
 
 
 export default handleActions({
+  [INITIALIZE_RANGE]: (state, action) => ({
+    ...state,
+    values: {
+      ...state.values,
+      ...action.payload,
+    }
+  }),
   [TYPE_PORTFOLIO]: (state, action) => ({
     ...state,
     type: action.payload,

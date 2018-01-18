@@ -7,9 +7,11 @@
 */
 
 const initialState = {
-  min: 0,
-  max: 100,
-  value: [40, 80]
+  values: {
+    min: 0,
+    max: 100,
+    interval: [40, 80]
+  }
 };
 
 export default initialState;

@@ -14,11 +14,14 @@ import ProgressBar from '../components/progress-bar';
 import styles from './range.scss';
 
 class Range extends React.Component {
+  componentWillMount() {
+    this.props.initializeRange();
+  }
   render() {
     const { props } = this;
     return (
       <div className={styles['date-line-panel']}>
-        <ProgressBar min={props.min} max={props.max} value={props.value} />
+        <ProgressBar values={props.values} />
       </div>
     );
   }

@@ -9,8 +9,19 @@
 import {
   NEXT_SITE_SLIDE,
   TYPE_PORTFOLIO,
-  NEXT_SPA_SLIDE
+  NEXT_SPA_SLIDE,
+  INITIALIZE_RANGE
 } from '../constants';
+
+import transparentToPercent from '../helper/transparent-to-percent';
+
+export const initializeRange = () => (dispatch, getState) => {
+  const state = getState().Range.values;
+  dispatch({
+    type: INITIALIZE_RANGE,
+    payload: transparentToPercent(state.min, state.max, state.interval)
+  });
+};
 
 /* перелистывание слайдов страниц верстки */
 export const nextSiteStep = sign => (dispatch, getState) => {

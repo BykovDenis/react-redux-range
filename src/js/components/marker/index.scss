@@ -1,0 +1,14 @@
+.marker {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: border-radius 1s ease-in-out;
+  &:hover {
+    border-width: 7px;
+    background-color: rgba(66, 162, 225, .7);
+    cursor: pointer;
+  }
+}
