@@ -9,17 +9,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.scss';
 
-export default function ProgressBar(props) {
-  const styleProgressFiled = {
-    left: `${props.value[0]}%`,
-    width: `${props.value[1]}%`,
-  };
-  console.log(props.min, props.max);
-  return (
-    <div className={styles['progress-bar']}>
-      <div className={styles['progress-bar--filled']} style={styleProgressFiled} />
-    </div>
-  );
+export default class ProgressBar extends React.Component {
+  componentWillMount() {
+    const { props } = this;
+    this.coords = this.transparentToPixels(props.min, props.max, props.value);
+  }
+  /**
+   * helper processed DOM coords
+   * @param {*} min
+   * @param {*} max
+   * @param {*} value
+   */
+  transparentToPixels(min, max, value) {
+    const percentWidth = 100;
+    // const pxMin = (min * pxWidth) / 100;
+    // const pxMax = (max * pxWidth) / 100;
+    const percentValueFrom = (value[0] * percentWidth) / 100;
+    const percentValueTo = (value[1] * percentWidth) / 100;
+    return {
+      left: `${percentValueFrom}%`,
+      width: `${percentValueTo - percentValueFrom}%`,
+    };
+  }
+  render() {
+    return (
+      <div className={styles['progress-bar']}>
+        <div className={styles['progress-bar--filled']} style={this.coords} />
+      </div>
+    );
+  }
 }
 
 ProgressBar.defaultProps = {
