@@ -7,13 +7,22 @@
 */
 
 import {
-  NEXT_SITE_SLIDE,
-  TYPE_PORTFOLIO,
-  NEXT_SPA_SLIDE,
-  INITIALIZE_RANGE
+  SET_MIN_MARKER_NEW_POSITION,
+  SET_MAX_MARKER_NEW_POSITION,
+  MARKER_MIN_MOVE,
+  MARKER_MAX_MOVE,
+  INITIALIZE_RANGE,
+  INIT_WIDTH_CONTAINER
 } from '../constants';
 
-import transparentToPercent from '../helper/transparent-to-percent';
+import { transparentToPercent, convertPXToPercent } from '../helper/transparent-to-percent';
+
+/**
+ * detect offset component relation vieport
+ * @param {*} posX
+ */
+export const initWidthContainer = container => dispatch =>
+  dispatch({ type: INIT_WIDTH_CONTAINER, payload: container });
 
 export const initializeRange = () => (dispatch, getState) => {
   const state = getState().Range.values;
@@ -23,30 +32,32 @@ export const initializeRange = () => (dispatch, getState) => {
   });
 };
 
-/* перелистывание слайдов страниц верстки */
-export const nextSiteStep = sign => (dispatch, getState) => {
-  const state = getState().Portfolio;
-  let step = state.siteStep;
-  if (sign === 'add') {
-    step = step >= 5 ? 0 : step + 1;
-  } else if (sign === 'sub') {
-    step = step >= 1 ? step - 1 : 5;
-  }
-  dispatch({ type: NEXT_SITE_SLIDE, payload: step });
+export const markerMinMove = (posX, flag) => (dispatch) => {
+  dispatch({ type: MARKER_MIN_MOVE, payload: { posX, flag } });
 };
 
-/* перелистывание слайдов страниц SPA */
-export const nextSPAStep = sign => (dispatch, getState) => {
-  const state = getState().Portfolio;
-  let step = state.spaStep;
-  if (sign === 'add') {
-    step = step >= 2 ? 0 : step + 1;
-  } else if (sign === 'sub') {
-    step = step >= 1 ? step - 1 : 2;
-  }
-  dispatch({ type: NEXT_SPA_SLIDE, payload: step });
+export const markerMaxMove = (posX, flag) => (dispatch) => {
+  dispatch({ type: MARKER_MAX_MOVE, payload: { posX, flag, } });
 };
 
-/** Переключение типа портфолио компонентов и страничек */
-export const changeType = type => dispatch => dispatch({ type: TYPE_PORTFOLIO, payload: type });
-
+export const setMarkerNewPosition = posX => (dispatch, getState) => {
+  const state = getState().Range;
+  const minMarker = state.minMarker;
+  const maxMarker = state.maxMarker;
+  if (minMarker.editing && !maxMarker.editing) {
+    const percentX = convertPXToPercent(posX, state.values.widthContainer,
+      state.values.posXContainer);
+    dispatch({
+      type: SET_MIN_MARKER_NEW_POSITION,
+      payload: { posX, percentX },
+    });
+  }
+  if (maxMarker.editing && !minMarker.editing) {
+    const percentX = convertPXToPercent(posX, state.values.widthContainer,
+      state.values.posXContainer);
+    dispatch({
+      type: SET_MAX_MARKER_NEW_POSITION,
+      payload: { posX, percentX },
+    });
+  }
+};

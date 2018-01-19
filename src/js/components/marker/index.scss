@@ -1,13 +1,20 @@
 .marker {
+  box-sizing: border-box;
   position: absolute;
   z-index: 4;
   top: 50%;
-  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  transform: translate(-12.5px, -50%);
+  border: 5px solid rgba(66, 162, 225, .7);
   border-radius: 50%;
   background-color: #ffffff;
-  transition: border-radius 1s ease-in-out;
+  transition: width, height, left .3s ease-in-out;
+  outline: 0;
   &:hover {
-    border-width: 7px;
+    width: 28px;
+    height: 28px;
+    transform: translate(-14px, -50%);
     background-color: rgba(66, 162, 225, .7);
     cursor: pointer;
 

@@ -1,15 +1,22 @@
 .progress-bar {
-  position: relative;
-  height: 5px;
-  min-width: 95%;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, .3);
-  transition: all 1s ease-in-out;
-  &--filled {
+  display: flex;
+  width: 95%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &__line {
+    width: 100%;
     position: relative;
     height: 5px;
-    box-sizing: border-box;
-    background-color: rgba(66, 162, 225, .7);
-    z-index: 3;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, .3);
+    transition: all 1s ease-in-out;
+    &--filled {
+      position: relative;
+      height: 5px;
+      box-sizing: border-box;
+      background-color: rgba(66, 162, 225, .7);
+      z-index: 3;
+    }
   }
 }

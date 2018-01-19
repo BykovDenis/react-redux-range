@@ -6,12 +6,12 @@
   box-sizing: border-box;
   position: relative;
   background-color: rgba(255, 255, 255, .7);
-  padding: 20px 27px;
+  padding: 0;
   border-radius: 3px;
   min-width: 800px;
   min-height: 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   &__items {
     padding: 0;
