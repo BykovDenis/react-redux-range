@@ -27,9 +27,14 @@ export const initWidthContainer = container => dispatch =>
 
 export const initializeRange = () => (dispatch, getState) => {
   const state = getState().Range.values;
+  const values = transparentToPercent(state.min, state.max, state.interval, state.dots);
+  values.percentValue = [
+    searchNearestRoute(values.percentValue[0], values.percentDots),
+    searchNearestRoute(values.percentValue[1], values.percentDots)
+  ];
   dispatch({
     type: INITIALIZE_RANGE,
-    payload: transparentToPercent(state.min, state.max, state.interval, state.dots)
+    payload: values
   });
 };
 
