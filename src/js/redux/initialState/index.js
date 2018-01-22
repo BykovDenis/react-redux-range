@@ -13,6 +13,7 @@ const initialState = {
     interval: [0, 80],
     dots: [20, 35, 60, 75, 95],
     percentValue: [0, 0],
+    percentDots: [],
     widthContainer: 0,
     posXContainer: 0,
   },

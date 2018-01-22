@@ -26,7 +26,7 @@ export default handleActions({
     ...state,
     values: {
       ...state.values,
-      percentValue: [action.payload.percentX, state.values.percentValue[1]],
+      percentValue: action.payload.percentValue,
     },
     minMarker: {
       ...state.minMarker,
@@ -39,7 +39,7 @@ export default handleActions({
     ...state,
     values: {
       ...state.values,
-      percentValue: [state.values.percentValue[0], action.payload.percentX],
+      percentValue: action.payload.percentValue,
     },
     maxMarker: {
       ...state.maxMarker,

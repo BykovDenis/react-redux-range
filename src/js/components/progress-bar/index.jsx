@@ -41,10 +41,6 @@ export default class ProgressBar extends React.Component {
         dots = values.percentDots.map((elem, index) =>
           <Dot key={elem + Math.random()} position={elem} label={arrDots[index]} />);
       }
-      if (dots) {
-        dots.unshift(<Dot key={Math.random()} position={values.percentMin} label={values.min} />);
-        dots.push(<Dot key={Math.random()} position={values.percentMax} label={values.max} />);
-      }
     }
     return (
       <div

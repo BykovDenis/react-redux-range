@@ -16,6 +16,7 @@ import {
 } from '../constants';
 
 import { transparentToPercent, convertPXToPercent } from '../helper/transparent-to-percent';
+import searchNearestRoute from '../helper/search-nearest-route';
 
 /**
  * detect offset component relation vieport
@@ -44,20 +45,42 @@ export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
   const state = getState().Range;
   const minMarker = state.minMarker;
   const maxMarker = state.maxMarker;
+  let percentValue = state.values.percentValue;
   if (minMarker.editing && !maxMarker.editing) {
+    // return value of percent
     const percentX = convertPXToPercent(posX, state.values.widthContainer,
       state.values.posXContainer);
+    let lastElement = percentValue[1];
+    // return near value of array values
+    let x;
+    if (!flag) {
+      x = searchNearestRoute(percentX, state.values.percentDots);
+      lastElement = searchNearestRoute(lastElement, state.values.percentDots);
+    } else {
+      x = percentX;
+    }
+    percentValue = lastElement < x ? [lastElement, x] : [x, lastElement];
     dispatch({
       type: SET_MIN_MARKER_NEW_POSITION,
-      payload: { posX, percentX, flag },
+      payload: { posX, percentX: x, flag, percentValue },
     });
   }
   if (maxMarker.editing && !minMarker.editing) {
     const percentX = convertPXToPercent(posX, state.values.widthContainer,
       state.values.posXContainer);
+    let firstElement = percentValue[0];
+    // return near value of array values
+    let x;
+    if (!flag) {
+      x = searchNearestRoute(percentX, state.values.percentDots);
+      firstElement = searchNearestRoute(firstElement, state.values.percentDots);
+    } else {
+      x = percentX;
+    }
+    percentValue = firstElement > x ? [x, firstElement] : [firstElement, x];
     dispatch({
       type: SET_MAX_MARKER_NEW_POSITION,
-      payload: { posX, percentX, flag },
+      payload: { posX, percentX: x, flag, percentValue },
     });
   }
 };
