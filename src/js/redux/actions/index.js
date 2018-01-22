@@ -17,6 +17,7 @@ import {
 
 import { transparentToPercent, convertPXToPercent } from '../helper/transparent-to-percent';
 import searchNearestRoute from '../helper/search-nearest-route';
+import transparentToPixels from '../helper/transparent-to-pixels';
 
 /**
  * detect offset component relation vieport
@@ -51,6 +52,7 @@ export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
   const minMarker = state.minMarker;
   const maxMarker = state.maxMarker;
   let percentValue = state.values.percentValue;
+  const max = state.values.max;
   if (minMarker.editing && !maxMarker.editing) {
     // return value of percent
     const percentX = convertPXToPercent(posX, state.values.widthContainer,
@@ -65,9 +67,10 @@ export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
       x = percentX;
     }
     percentValue = lastElement < x ? [lastElement, x] : [x, lastElement];
+    const interval = [transparentToPixels(x, max), transparentToPixels(lastElement, max)];
     dispatch({
       type: SET_MIN_MARKER_NEW_POSITION,
-      payload: { posX, percentX: x, flag, percentValue },
+      payload: { posX, percentX: x, flag, percentValue, interval },
     });
   }
   if (maxMarker.editing && !minMarker.editing) {
@@ -83,9 +86,10 @@ export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
       x = percentX;
     }
     percentValue = firstElement > x ? [x, firstElement] : [firstElement, x];
+    const interval = [transparentToPixels(firstElement, max), transparentToPixels(x, max)];
     dispatch({
       type: SET_MAX_MARKER_NEW_POSITION,
-      payload: { posX, percentX: x, flag, percentValue },
+      payload: { posX, percentX: x, flag, percentValue, interval },
     });
   }
 };
