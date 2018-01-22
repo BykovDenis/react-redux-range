@@ -32,7 +32,7 @@ export default handleActions({
       ...state.minMarker,
       posX: action.payload.posX,
       percentX: action.payload.percentX,
-      editing: false,
+      editing: action.payload.flag,
     }
   }),
   [SET_MAX_MARKER_NEW_POSITION]: (state, action) => ({
@@ -45,7 +45,7 @@ export default handleActions({
       ...state.maxMarker,
       posX: action.payload.posX,
       percentX: action.payload.percentX,
-      editing: false,
+      editing: action.payload.flag,
     }
   }),
   [MARKER_MIN_MOVE]: (state, action) => ({

@@ -40,7 +40,7 @@ export const markerMaxMove = (posX, flag) => (dispatch) => {
   dispatch({ type: MARKER_MAX_MOVE, payload: { posX, flag, } });
 };
 
-export const setMarkerNewPosition = posX => (dispatch, getState) => {
+export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
   const state = getState().Range;
   const minMarker = state.minMarker;
   const maxMarker = state.maxMarker;
@@ -49,7 +49,7 @@ export const setMarkerNewPosition = posX => (dispatch, getState) => {
       state.values.posXContainer);
     dispatch({
       type: SET_MIN_MARKER_NEW_POSITION,
-      payload: { posX, percentX },
+      payload: { posX, percentX, flag },
     });
   }
   if (maxMarker.editing && !minMarker.editing) {
@@ -57,7 +57,7 @@ export const setMarkerNewPosition = posX => (dispatch, getState) => {
       state.values.posXContainer);
     dispatch({
       type: SET_MAX_MARKER_NEW_POSITION,
-      payload: { posX, percentX },
+      payload: { posX, percentX, flag },
     });
   }
 };

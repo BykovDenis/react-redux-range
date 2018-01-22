@@ -15,14 +15,18 @@ export default class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleFinishedMoveMarker = this.handleFinishedMoveMarker.bind(this);
+    this.handleMoveMarker = this.handleMoveMarker.bind(this);
   }
   componentDidMount() {
     const widthContainer = this.el.getBoundingClientRect().width;
     const posXContainer = this.el.getBoundingClientRect().x;
     this.props.initWidthContainer({ widthContainer, posXContainer });
   }
+  handleMoveMarker(e) {
+    this.props.setMarkerNewPosition(e.pageX, true);
+  }
   handleFinishedMoveMarker(e) {
-    this.props.setMarkerNewPosition(e.pageX);
+    this.props.setMarkerNewPosition(e.pageX, false);
   }
   render() {
     const { values } = this.props;
@@ -43,7 +47,11 @@ export default class ProgressBar extends React.Component {
       }
     }
     return (
-      <div className={styles['progress-bar']} ref={el => this.el = el} onMouseUp={this.handleFinishedMoveMarker}>
+      <div
+        className={styles['progress-bar']} ref={el => this.el = el}
+        onMouseUp={this.handleFinishedMoveMarker}
+        onMouseOver={this.handleMoveMarker}
+      >
         <div className={styles['progress-bar__line']}>
           {dots}
           <Marker
