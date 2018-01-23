@@ -5,6 +5,7 @@
     "mocha": true
   },
   "rules": {
+    "dot-notation": 0,
     "no-return-assign": 1,
     "no-debugger": 1,
     "global-require": 0,

@@ -7,9 +7,12 @@
 */
 
 const initialState = {
-  min: 0,
-  max: 100,
-  value: [40, 80]
+  values: {
+    min: 0,
+    max: 120,
+    interval: [40, 80],
+    dots: [20, 35, 60, 75, 95]
+  }
 };
 
 export default initialState;

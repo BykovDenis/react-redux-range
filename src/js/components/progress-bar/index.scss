@@ -1,4 +1,5 @@
 .progress-bar {
+  position: relative;
   height: 5px;
   min-width: 95%;
   border-radius: 5px;
@@ -8,7 +9,7 @@
     position: relative;
     height: 5px;
     box-sizing: border-box;
-    border-color: rgba(66, 162, 225, .7);
     background-color: rgba(66, 162, 225, .7);
+    z-index: 3;
   }
 }
