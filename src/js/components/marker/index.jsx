@@ -8,7 +8,11 @@ export default function Marker(props) {
     left: `${props.position}%`
   };
   const handleBeginMoveMarker = (e) => {
+    e.target.classList.add('marker--active');
     props.markerMove(e.pageX, true);
+  };
+  const handleFinishMoveMarker = (e) => {
+    e.target.classList.remove('marker--active');
   };
   return (
     <div>
@@ -17,6 +21,8 @@ export default function Marker(props) {
         className={styles['marker']}
         style={positionMarker}
         onMouseDown={handleBeginMoveMarker}
+        onMouseUp={handleFinishMoveMarker}
+        onMouseOut={handleFinishMoveMarker}
       >
         <Balloon label={props.label} />
       </button>

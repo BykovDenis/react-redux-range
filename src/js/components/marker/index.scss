@@ -9,18 +9,16 @@
   border: 5px solid rgba(66, 162, 225, .7);
   border-radius: 50%;
   background-color: #ffffff;
+  &:hover > .balloon {
+    display: block;
+  }
   /* transition: width, height, left .3s ease-in-out; */
   outline: 0;
-  &:hover {
+  &--active {
     width: 28px;
     height: 28px;
     transform: translate(-14px, -50%);
-    background-color: rgba(66, 162, 225, .7);
+    background-color: rgb(66, 162, 225);
     cursor: pointer;
-
-    & > .balloon {
-      display: block;
-    }
-
   }
 }
