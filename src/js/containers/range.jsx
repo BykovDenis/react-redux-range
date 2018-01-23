@@ -21,7 +21,13 @@ class Range extends React.Component {
     const { props } = this;
     return (
       <div className={styles['date-line-panel']}>
-        <ProgressBar values={props.values} />
+        <ProgressBar
+          values={props.values}
+          markerMinMove={props.markerMinMove}
+          markerMaxMove={props.markerMaxMove}
+          setMarkerNewPosition={props.setMarkerNewPosition}
+          initWidthContainer={props.initWidthContainer}
+        />
       </div>
     );
   }

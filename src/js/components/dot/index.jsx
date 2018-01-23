@@ -21,10 +21,10 @@ export default function Dot(props) {
 
 Dot.defaultProps = {
   position: 0,
-  label: '',
+  label: 0,
 };
 
 Dot.propTypes = {
   position: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.number.isRequired,
 };

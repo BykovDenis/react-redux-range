@@ -15,5 +15,5 @@ Balloon.defaultProps = {
 };
 
 Balloon.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.number.isRequired
 };

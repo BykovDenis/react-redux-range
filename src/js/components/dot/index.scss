@@ -2,7 +2,7 @@
   position: absolute;
   z-index: 3;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(-7.5px);
   border-radius: 50%;
   background-color: #ffffff;
   transition: border-radius 1s ease-in-out;

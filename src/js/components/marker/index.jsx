@@ -4,32 +4,40 @@ import Balloon from '../balloon';
 import styles from './index.scss';
 
 export default function Marker(props) {
-  const diameterMarker = 5;
-  const borderSize = 5;
   const positionMarker = {
-    width: `${diameterMarker}px`,
-    height: `${diameterMarker}px`,
-    border: `${borderSize}px solid rgba(66, 162, 225, .7)`,
     left: `${props.position}%`
   };
-  if (props.type === 'max') {
-    positionMarker.transform = `translateY(-50%) translateX(-${(borderSize * 2) + diameterMarker}px)`;
-  }
+  const handleBeginMoveMarker = (e) => {
+    e.target.classList.add('marker--active');
+    props.markerMove(e.pageX, true);
+  };
+  const handleFinishMoveMarker = (e) => {
+    e.target.classList.remove('marker--active');
+  };
   return (
-    <div className={styles['marker']} style={positionMarker}>
-      <Balloon label={props.label} />
+    <div>
+      <button
+        type="button"
+        className={styles['marker']}
+        style={positionMarker}
+        onMouseDown={handleBeginMoveMarker}
+        onMouseUp={handleFinishMoveMarker}
+        onMouseOut={handleFinishMoveMarker}
+      >
+        <Balloon label={props.label} />
+      </button>
     </div>
   );
 }
 
 Marker.defaultProps = {
   position: 0,
-  type: 'min',
-  label: '',
+  label: 0,
+  markerMove: () => {},
 };
 
 Marker.propTypes = {
   position: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.number.isRequired,
+  markerMove: PropTypes.func.isRequired,
 };

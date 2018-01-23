@@ -10,8 +10,22 @@ const initialState = {
   values: {
     min: 0,
     max: 120,
-    interval: [40, 80],
-    dots: [20, 35, 60, 75, 95]
+    interval: [0, 80],
+    dots: [20, 35, 60, 75, 95],
+    percentValue: [0, 0],
+    percentDots: [],
+    widthContainer: 0,
+    posXContainer: 0,
+  },
+  minMarker: {
+    posX: 0,
+    percentX: 0,
+    editing: false,
+  },
+  maxMarker: {
+    posX: 0,
+    percentX: 0,
+    editing: false,
   }
 };
 

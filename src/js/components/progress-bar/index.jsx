@@ -12,11 +12,27 @@ import Dot from '../dot';
 import styles from './index.scss';
 
 export default class ProgressBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleFinishedMoveMarker = this.handleFinishedMoveMarker.bind(this);
+    this.handleMoveMarker = this.handleMoveMarker.bind(this);
+  }
+  componentDidMount() {
+    const widthContainer = this.el.getBoundingClientRect().width;
+    const posXContainer = this.el.getBoundingClientRect().x;
+    this.props.initWidthContainer({ widthContainer, posXContainer });
+  }
+  handleMoveMarker(e) {
+    this.props.setMarkerNewPosition(e.pageX, true);
+  }
+  handleFinishedMoveMarker(e) {
+    this.props.setMarkerNewPosition(e.pageX, false);
+  }
   render() {
     const { values } = this.props;
     const styleProgressFill = {
-      left: `${values.left}%`,
-      width: `${values.width}%`
+      left: `${values.percentValue[0]}%`,
+      width: `${values.percentValue[1] - values.percentValue[0]}%`
     };
     let dots;
     if (values) {
@@ -25,28 +41,46 @@ export default class ProgressBar extends React.Component {
         dots = values.percentDots.map((elem, index) =>
           <Dot key={elem + Math.random()} position={elem} label={arrDots[index]} />);
       }
-      dots.unshift(<Dot key={Math.random()} position={values.percentMin} label={values.min} />);
-      dots.push(<Dot key={Math.random()} position={values.percentMax} label={values.max} />);
     }
     return (
-      <div className={styles['progress-bar']}>
-        {dots}
-        <Marker position={values.left} type="min" label={values.interval[0]} />
-        <div className={styles['progress-bar--filled']} style={styleProgressFill} />
-        <Marker
-          position={values.left + values.width}
-          label={values.interval[1]}
-          type="max"
-        />
+      <div
+        className={styles['progress-bar']} ref={el => this.el = el}
+        onMouseUp={this.handleFinishedMoveMarker}
+        onMouseOver={this.handleMoveMarker}
+      >
+        <div className={styles['progress-bar__line']}>
+          {dots}
+          <Marker
+            position={values.percentValue[0]}
+            label={values.interval[0]}
+            markerMove={this.props.markerMinMove}
+          />
+          <div className={styles['progress-bar__line--filled']} style={styleProgressFill} />
+          <Marker
+            position={values.percentValue[1]}
+            label={values.interval[1]}
+            markerMove={this.props.markerMaxMove}
+          />
+        </div>
       </div>
     );
   }
 }
 
 ProgressBar.defaultProps = {
-  values: {}
+  values: {
+    percentValue: [0, 0],
+  },
+  markerMinMove: () => {},
+  markerMaxMove: () => {},
+  setMarkerNewPosition: () => {},
+  initWidthContainer: () => {},
 };
 
 ProgressBar.propTypes = {
-  values: PropTypes.shape.isRequired,
+  values: PropTypes.object.isRequired,
+  markerMinMove: PropTypes.func.isRequired,
+  markerMaxMove: PropTypes.func.isRequired,
+  setMarkerNewPosition: PropTypes.func.isRequired,
+  initWidthContainer: PropTypes.func.isRequired,
 };
