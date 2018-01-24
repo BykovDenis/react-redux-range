@@ -10,21 +10,28 @@ export default function Dot(props) {
     width: `${diameterMarker}px`,
     height: `${diameterMarker}px`,
     border: `${borderSize}px solid rgba(0, 0, 0, .6)`,
-    left: `${props.position}%`
+    left: `${props.position}%`,
+    padding: 0,
+    outline: 0,
+  };
+  const handleClickDot = () => {
+    props.setMarkerNewPositionFromDots(props.position);
   };
   return (
-    <div className={styles['dot']} style={positionMarker}>
+    <button className={styles['dot']} style={positionMarker} onClick={handleClickDot}>
       <Balloon label={props.label} />
-    </div>
+    </button>
   );
 }
 
 Dot.defaultProps = {
   position: 0,
   label: 0,
+  setMarkerNewPositionFromDots: () => {},
 };
 
 Dot.propTypes = {
   position: PropTypes.number.isRequired,
   label: PropTypes.number.isRequired,
+  setMarkerNewPositionFromDots: PropTypes.func.isRequired,
 };

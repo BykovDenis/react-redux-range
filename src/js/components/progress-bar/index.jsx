@@ -44,8 +44,14 @@ export default class ProgressBar extends React.Component {
     if (values) {
       if (values.percentDots) {
         const arrDots = values.dots;
-        dots = values.percentDots.map((elem, index) =>
-          <Dot key={elem + Math.random()} position={elem} label={arrDots[index]} />);
+        dots = values.percentDots.map((elem, index) => (
+          <Dot
+            key={elem + Math.random()}
+            position={elem}
+            label={arrDots[index]}
+            setMarkerNewPositionFromDots={this.props.setMarkerNewPositionFromDots}
+          />
+        ));
       }
     }
     return (
@@ -81,6 +87,7 @@ ProgressBar.defaultProps = {
   markerMaxMove: () => {},
   setMarkerNewPosition: () => {},
   initWidthContainer: () => {},
+  setMarkerNewPositionFromDots: () => {},
 };
 
 ProgressBar.propTypes = {
@@ -89,4 +96,5 @@ ProgressBar.propTypes = {
   markerMaxMove: PropTypes.func.isRequired,
   setMarkerNewPosition: PropTypes.func.isRequired,
   initWidthContainer: PropTypes.func.isRequired,
+  setMarkerNewPositionFromDots: PropTypes.func.isRequired,
 };

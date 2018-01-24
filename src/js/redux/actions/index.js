@@ -7,6 +7,7 @@
 */
 
 import {
+  SET_MARKER_NEW_POSITION_FROM_DOTS,
   SET_MIN_MARKER_NEW_POSITION,
   SET_MAX_MARKER_NEW_POSITION,
   MARKER_MIN_MOVE,
@@ -92,4 +93,31 @@ export const setMarkerNewPosition = (posX, flag) => (dispatch, getState) => {
       payload: { posX, percentX: x, flag, percentValue, interval },
     });
   }
+};
+
+export const setMarkerNewPositionFromDots = position => (dispatch, getState) => {
+  const stateValues = getState().Range.values;
+  const percentValue = stateValues.percentValue;
+  const diffMin = Math.abs(position - percentValue[0]);
+  const diffMax = Math.abs(position - percentValue[1]);
+  const marker = {
+    posX: searchNearestRoute(position, stateValues.percentDots),
+    percentX: position,
+    editing: false,
+  };
+  const pxPosition = transparentToPixels(position, stateValues.max);
+  const values = {
+    ...stateValues,
+    interval: diffMax < diffMin ?
+    [stateValues.interval[0], pxPosition] :
+    [pxPosition, stateValues.interval[1]],
+    percentValue: diffMax < diffMin ?
+      [percentValue[0], position] :
+      [position, percentValue[1]]
+  };
+  dispatch({
+    type: SET_MARKER_NEW_POSITION_FROM_DOTS,
+    payload: diffMax < diffMin ? { values, maxMarker: { ...marker } } :
+      { values, minMarker: { ...marker } }
+  });
 };

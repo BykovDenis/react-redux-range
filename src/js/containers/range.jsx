@@ -27,6 +27,7 @@ class Range extends React.Component {
           markerMaxMove={props.markerMaxMove}
           setMarkerNewPosition={props.setMarkerNewPosition}
           initWidthContainer={props.initWidthContainer}
+          setMarkerNewPositionFromDots={props.setMarkerNewPositionFromDots}
         />
       </div>
     );
