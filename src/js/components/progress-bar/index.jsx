@@ -18,9 +18,15 @@ export default class ProgressBar extends React.Component {
     this.handleMoveMarker = this.handleMoveMarker.bind(this);
   }
   componentDidMount() {
-    const widthContainer = this.el.getBoundingClientRect().width;
-    const posXContainer = this.el.getBoundingClientRect().x;
+    let widthContainer = this.el.getBoundingClientRect().width;
+    let posXContainer = this.el.getBoundingClientRect().x;
     this.props.initWidthContainer({ widthContainer, posXContainer });
+    // вешаем глобальный обработчик на изменение размеров окна
+    window.onresize = () => {
+      widthContainer = this.el.getBoundingClientRect().width;
+      posXContainer = this.el.getBoundingClientRect().x;
+      this.props.initWidthContainer({ widthContainer, posXContainer });
+    };
   }
   handleMoveMarker(e) {
     this.props.setMarkerNewPosition(e.pageX, true);
