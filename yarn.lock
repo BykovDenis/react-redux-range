@@ -1117,7 +1117,7 @@ basisjs-tools-config@^1.1.0, basisjs-tools-config@~1.1.0:
   dependencies:
     osenv "0.1.3"
 
-"basisjs-tools-server@github:basisjs/basisjs-tools-server#rempl":
+basisjs-tools-server@basisjs/basisjs-tools-server#rempl:
   version "1.0.0"
   resolved "https://codeload.github.com/basisjs/basisjs-tools-server/tar.gz/7853182b647c7932287898cd17c39f3aa9fb6e77"
   dependencies:
